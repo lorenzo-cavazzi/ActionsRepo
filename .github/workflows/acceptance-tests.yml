@@ -15,6 +15,7 @@ jobs:
     outputs:
       pr-contains-string: ${{ steps.deploy-comment.outputs.pr-contains-string }}
     steps:
+      - uses: actions/checkout@v2
       - id: deploy-comment
         uses: ./actions/check-pr-description
         with:
