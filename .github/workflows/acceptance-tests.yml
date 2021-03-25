@@ -1,0 +1,22 @@
+name: Acceptance tests
+
+on:
+  pull_request:
+    types:
+    - opened
+    - edited
+    - synchronize
+    - reopened
+    - closed
+
+jobs:
+  check-deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      pr-contains-string: ${{ steps.deploy-comment.outputs.pr-contains-string }}
+    steps:
+      - id: deploy-comment
+        uses: ./actions/check-pr-description
+        with:
+          string: /deploy
+          pr_ref: ${{ github.event.number }}
