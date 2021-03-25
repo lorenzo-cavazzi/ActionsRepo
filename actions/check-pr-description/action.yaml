@@ -12,6 +12,7 @@ outputs:
     description: true/false whether the PR description contains the string
     value: ${{ steps.check-string.outputs.pr-contains-string }}
 # string-output
+# comment
 runs:
   using: "composite"
   steps:
