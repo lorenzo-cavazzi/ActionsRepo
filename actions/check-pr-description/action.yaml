@@ -42,7 +42,7 @@ runs:
     - id: check-string
       run: |
         pr_text=$(curl -s https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_ref }} | jq '.body')
-        pr_contains_string=$(echo $pr_text | jq 'test(\"${{ inputs.string }}\")')
+        pr_contains_string=$(echo $pr_text | jq 'test("${{ inputs.string }}")')
         echo "::set-output name=pr-contains-string::$pr_contains_string"
         echo $pr_contains_string
         echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_ref }}"
