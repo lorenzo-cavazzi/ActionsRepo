@@ -58,11 +58,33 @@ runs:
           if [[ $command != *"${{ inputs.string }}"* ]]; then
             echo "Command found: $command"
             match="renku=(\S*)"
-            [[ $command =~ $match ]] && echo "renku reference: ${BASH_REMATCH[1]}"
+            if [[ $command =~ $match ]]; then
+              echo "renku reference: ${BASH_REMATCH[1]}"
+            fi
+            match="renku-core=(\S*)"
+            if [[ $command =~ $match ]]; then
+              echo "renku-core reference: ${BASH_REMATCH[1]}"
+            fi
             match="renku-gateway=(\S*)"
-            [[ $command =~ $match ]] && echo "renku-gateway reference: ${BASH_REMATCH[1]}"
+            if [[ $command =~ $match ]]; then
+              echo "renku-gateway reference: ${BASH_REMATCH[1]}"
+            fi
+            match="renku-graph=(\S*)"
+            if [[ $command =~ $match ]]; then
+              echo "renku-graph reference: ${BASH_REMATCH[1]}"
+            fi
             match="renku-notebooks=(\S*)"
-            [[ $command =~ $match ]] && echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
+            if [[ $command =~ $match ]]; then
+              echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
+            fi
+            match="renku-ui=(\S*)"
+            if [[ $command =~ $match ]]; then
+              echo "renku-ui reference: ${BASH_REMATCH[1]}"
+            fi
+            match="renku-ui-server=(\S*)"
+            if [[ $command =~ $match ]]; then
+              echo "renku-ui-server reference: ${BASH_REMATCH[1]}"
+            fi
           else
             echo "No command found"
           fi
