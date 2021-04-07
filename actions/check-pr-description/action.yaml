@@ -58,26 +58,32 @@ runs:
             match="renku-core=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-core reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-core::${BASH_REMATCH[1]}"
             fi
             match="renku-gateway=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-gateway reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-gateway::${BASH_REMATCH[1]}"
             fi
             match="renku-graph=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-graph reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-graph::${BASH_REMATCH[1]}"
             fi
             match="renku-notebooks=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-notebooks::${BASH_REMATCH[1]}"
             fi
             match="renku-ui=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-ui reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-ui::${BASH_REMATCH[1]}"
             fi
             match="renku-ui-server=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku-ui-server reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku-ui-server::${BASH_REMATCH[1]}"
             fi
           else
             echo "No command found"
