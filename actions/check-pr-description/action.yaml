@@ -2,18 +2,22 @@ name: 'check PR description'
 description: Check the PR description for a string.
 inputs:
   string:
-    description: string to check for
+    description: String to check for
     required: true
   pr_ref:
     description: Pull request ID
     required: true
+  # components:
+  #   description: Comma separated list of components to consider in the command
+  #   required: false
+  #   default: "renku-core,renku-gateway,renku-graph,renku-notebooks,renku-ui,renku-ui-server"
 outputs:
   pr-contains-string:
     description: true/false whether the PR description contains the string
     value: ${{ steps.check-string.outputs.pr-contains-string }}
   renku-core:
     description: renku-core reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-core }}
   renku-gateway:
     description: renku-gateway reference as specified in the command string
     value: ""
