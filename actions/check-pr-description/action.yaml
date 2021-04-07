@@ -57,27 +57,6 @@ runs:
           command=$(echo $pr_text | jq -r 'split("${{ inputs.string }} ") | last | split("\r\n") | first')
           if [[ $command != *"${{ inputs.string }}"* ]]; then
             echo "Command found: $command"
-            match="renku=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku reference: ${BASH_REMATCH[1]}"
-            match="renku-core=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-core reference: ${BASH_REMATCH[1]}"
-            match="renku-gateway=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-gateway reference: ${BASH_REMATCH[1]}"
-            match="renku-graph=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-graph reference: ${BASH_REMATCH[1]}"
-            match="renku-notebooks=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
-            match="renku-ui=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-ui reference: ${BASH_REMATCH[1]}"
-            match="renku-ui-server=(\S*)"
-            [[ $command =~ $match ]] &&
-              echo "renku-ui-server reference: ${BASH_REMATCH[1]}"
           else
             echo "No command found"
           fi
