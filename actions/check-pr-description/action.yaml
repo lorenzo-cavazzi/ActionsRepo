@@ -15,6 +15,9 @@ outputs:
   pr-contains-string:
     description: true/false whether the PR description contains the string
     value: ${{ steps.check-string.outputs.pr-contains-string }}
+  renku:
+    description: renku reference as specified in the command string
+    value: ${{ steps.check-string.outputs.renku }}
   renku-core:
     description: renku-core reference as specified in the command string
     value: ${{ steps.check-string.outputs.renku-core }}
@@ -51,9 +54,32 @@ runs:
         echo "::set-output name=pr-contains-string::$pr_contains_string"
         echo "String found: $pr_contains_string"
         if [ "$pr_contains_string" = true ] ; then
-            command=$(echo $pr_text | jq 'split("${{ inputs.string }} ") | last | split("\r\n") | first')
-            if [[ $command != *"${{ inputs.string }}"* ]]; then
-                echo "Found command: $command"
-            fi
+          command=$(echo $pr_text | jq -r 'split("${{ inputs.string }} ") | last | split("\r\n") | first')
+          if [[ $command != *"${{ inputs.string }}"* ]]; then
+            echo "Command found: $command"
+            match="renku=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku reference: ${BASH_REMATCH[1]}" &&
+            match="renku-core=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-core reference: ${BASH_REMATCH[1]}"
+            match="renku-gateway=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-gateway reference: ${BASH_REMATCH[1]}"
+            match="renku-graph=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-graph reference: ${BASH_REMATCH[1]}"
+            match="renku-notebooks=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
+            match="renku-ui=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-ui reference: ${BASH_REMATCH[1]}"
+            match="renku-ui-server=(\S*)"
+            [[ $command =~ $match ]] &&
+              echo "renku-ui-server reference: ${BASH_REMATCH[1]}"
+          else
+            echo "No command found"
+          fi
         fi
       shell: bash
