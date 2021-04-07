@@ -11,8 +11,24 @@ outputs:
   pr-contains-string:
     description: true/false whether the PR description contains the string
     value: ${{ steps.check-string.outputs.pr-contains-string }}
-# string-output
-# comment
+  renku-core:
+    description: renku-core reference as specified in the command string
+    value: ""
+  renku-gateway:
+    description: renku-gateway reference as specified in the command string
+    value: ""
+  renku-graph:
+    description: renku-graph reference as specified in the command string
+    value: ""
+  renku-notebooks:
+    description: renku-notebooks reference as specified in the command string
+    value: ""
+  renku-ui:
+    description: renku-ui reference as specified in the command string
+    value: ""
+  renku-ui-server:
+    description: renku-ui-server reference as specified in the command string
+    value: ""
 runs:
   using: "composite"
   steps:
