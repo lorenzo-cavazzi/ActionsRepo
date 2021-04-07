@@ -23,29 +23,22 @@ outputs:
     value: ${{ steps.check-string.outputs.renku-core }}
   renku-gateway:
     description: renku-gateway reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-gateway }}
   renku-graph:
     description: renku-graph reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-graph }}
   renku-notebooks:
     description: renku-notebooks reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-notebooks }}
   renku-ui:
     description: renku-ui reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-ui }}
   renku-ui-server:
     description: renku-ui-server reference as specified in the command string
-    value: ""
+    value: ${{ steps.check-string.outputs.renku-ui-server }}
 runs:
   using: "composite"
   steps:
-    # - id: check-string
-    #   run: |
-    #     pr_contains_string=$(curl -s https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_ref }} | jq ".body | test(\"${{ inputs.string }}\")")
-    #     echo "::set-output name=pr-contains-string::$pr_contains_string"
-    #     echo $pr_contains_string
-    #     echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_ref }}"
-    #   shell: bash
     - id: check-string
       run: |
         echo "Target PR: https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_ref }}"
@@ -60,6 +53,7 @@ runs:
             match="renku=(\S*)"
             if [[ $command =~ $match ]]; then
               echo "renku reference: ${BASH_REMATCH[1]}"
+              echo "::set-output name=renku::${BASH_REMATCH[1]}"
             fi
             match="renku-core=(\S*)"
             if [[ $command =~ $match ]]; then
