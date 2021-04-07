@@ -47,6 +47,9 @@ runs:
         echo "::set-output name=pr-contains-string::$pr_contains_string"
         echo "String found: $pr_contains_string"
         if [ "$pr_contains_string" = true ] ; then
-            echo "I found the string, great!"
+            command=$(echo $pr_text | jq 'split("${{ inputs.string }} ") | last | split("\r\n") | first')
+            if [[ $command != *"${{ inputs.string }}"* ]]; then
+                echo "Found command: $command"
+            fi
         fi
       shell: bash
