@@ -59,7 +59,7 @@ runs:
             echo "Command found: $command"
             match="renku=(\S*)"
             [[ $command =~ $match ]] &&
-              echo "renku reference: ${BASH_REMATCH[1]}" &&
+              echo "renku reference: ${BASH_REMATCH[1]}"
             match="renku-core=(\S*)"
             [[ $command =~ $match ]] &&
               echo "renku-core reference: ${BASH_REMATCH[1]}"
