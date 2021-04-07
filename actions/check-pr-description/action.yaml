@@ -61,6 +61,8 @@ runs:
             [[ $command =~ $match ]] && echo "renku reference: ${BASH_REMATCH[1]}"
             match="renku-gateway=(\S*)"
             [[ $command =~ $match ]] && echo "renku-gateway reference: ${BASH_REMATCH[1]}"
+            match="renku-notebooks=(\S*)"
+            [[ $command =~ $match ]] && echo "renku-notebooks reference: ${BASH_REMATCH[1]}"
           else
             echo "No command found"
           fi
